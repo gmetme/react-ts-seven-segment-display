@@ -1,6 +1,6 @@
 {
   "name": "react-ts-seven-segment-display",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "A simple seven-segment display component built with React and TypeScript.",
   "keywords": [
     "react",
