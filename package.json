@@ -2,9 +2,27 @@
   "name": "react-ts-seven-segment-display",
   "version": "1.0.0",
   "description": "A simple seven-segment display component built with React and TypeScript.",
-  "main": "index.js",
+  "keywords": [
+    "react",
+    "typescript",
+    "seven-segment",
+    "seven",
+    "segment",
+    "display",
+    "digit",
+    "digital clock"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/begenchmyrat/react-ts-seven-segment-display"
   },
   "author": "begenchmyratmeredamanov@gmail.com",
   "license": "ISC",
