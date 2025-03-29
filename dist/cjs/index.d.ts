@@ -1,2 +1,2 @@
 import SevenSegmentDisplay from "./components/SevenSegmentDisplay";
-export { SevenSegmentDisplay };
+export default SevenSegmentDisplay;

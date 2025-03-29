@@ -4,8 +4,7 @@ A React component that renders a seven-segment display to visually represent num
 
 ## Installation
 
-![Seven Segment Display](https://github.com/begenchmyrat/react-ts-seven-segment-display/assets/start.jpg)
-![Seven Segment Display](https://github.com/begenchmyrat/react-ts-seven-segment-display/assets/end.jpg)
+![Seven Segment Display](https://github.com/begenchmyrat/react-ts-seven-segment-display/assets/preview.png)
 
 Install the package using npm:
 
