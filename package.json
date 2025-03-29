@@ -1,0 +1,18 @@
+{
+  "name": "react-ts-seven-segment-display",
+  "version": "1.0.0",
+  "description": "A simple seven-segment display component built with React and TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "begenchmyratmeredamanov@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/prop-types": "^15.7.14",
+    "@types/react": "^19.0.12",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.2"
+  }
+}
