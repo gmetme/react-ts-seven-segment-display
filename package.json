@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/begenchmyrat/react-ts-seven-segment-display"
+    "url": "git+https://github.com/begenchmyrat/react-ts-seven-segment-display.git"
   },
   "author": "begenchmyratmeredamanov@gmail.com",
   "license": "ISC",
