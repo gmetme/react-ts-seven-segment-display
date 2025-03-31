@@ -5,8 +5,13 @@ var SevenSegmentDisplay = function (_a) {
     var _b = _a.value, value = _b === void 0 ? null : _b, _c = _a.height, height = _c === void 0 ? 64 : _c, _d = _a.segmentSize, segmentSize = _d === void 0 ? 8 : _d, _e = _a.bgColor, bgColor = _e === void 0 ? "#F2F2F2" : _e, _f = _a.color, color = _f === void 0 ? "#545C6C" : _f, _g = _a.spacing, spacing = _g === void 0 ? 8 : _g, startFromEnd = _a.startFromEnd, autoGrow = _a.autoGrow;
     segmentSize = autoGrow && value !== null && value.toString().length > segmentSize ? value.toString().length : segmentSize;
     var digits = {
-        "-": [bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, color],
         "null": [bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, bgColor],
+        " ": [bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, bgColor],
+        "-": [bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, color],
+        "_": [bgColor, bgColor, bgColor, color, bgColor, bgColor, bgColor],
+        "=": [bgColor, bgColor, bgColor, color, bgColor, bgColor, color],
+        "[": [color, bgColor, bgColor, color, color, color, bgColor],
+        "]": [color, color, color, color, bgColor, bgColor, bgColor],
         "0": [color, color, color, color, color, color, bgColor],
         "1": [bgColor, color, color, bgColor, bgColor, bgColor, bgColor],
         "2": [color, color, bgColor, color, color, bgColor, color],
@@ -17,6 +22,32 @@ var SevenSegmentDisplay = function (_a) {
         "7": [color, color, color, bgColor, bgColor, bgColor, bgColor],
         "8": [color, color, color, color, color, color, color],
         "9": [color, color, color, color, bgColor, color, color],
+        "A": [color, color, color, bgColor, color, color, color],
+        "B": [bgColor, bgColor, color, color, color, color, color],
+        "C": [color, bgColor, bgColor, color, color, color, bgColor],
+        "D": [bgColor, color, color, color, color, bgColor, color],
+        "E": [color, bgColor, bgColor, color, color, color, color],
+        "F": [color, bgColor, bgColor, bgColor, color, color, color],
+        "G": [color, bgColor, color, color, color, color, bgColor],
+        "H": [bgColor, bgColor, color, bgColor, color, color, color],
+        "I": [bgColor, bgColor, bgColor, bgColor, color, color, bgColor],
+        "J": [bgColor, color, color, color, color, bgColor, bgColor],
+        "K": [color, bgColor, color, bgColor, color, color, color],
+        "L": [bgColor, bgColor, bgColor, color, color, color, bgColor],
+        "M": [color, bgColor, color, bgColor, color, bgColor, bgColor],
+        "N": [color, color, color, bgColor, color, color, bgColor],
+        "O": [color, color, color, color, color, color, bgColor],
+        "P": [color, color, bgColor, bgColor, color, color, color],
+        "Q": [color, color, color, bgColor, bgColor, color, color],
+        "R": [color, color, bgColor, bgColor, color, color, bgColor],
+        "S": [color, bgColor, color, color, bgColor, color, color],
+        "T": [bgColor, bgColor, bgColor, color, color, color, color],
+        "U": [bgColor, color, color, color, color, color, bgColor],
+        "V": [bgColor, color, color, color, bgColor, color, bgColor],
+        "W": [bgColor, color, bgColor, color, bgColor, color, bgColor],
+        "X": [bgColor, color, color, bgColor, color, color, color],
+        "Y": [bgColor, color, color, color, bgColor, color, color],
+        "Z": [color, color, bgColor, color, bgColor, bgColor, color]
     };
     var digitPositions = [
         'M49 0H15L8 7L15 14H49L56 7L49 0Z',
@@ -31,7 +62,7 @@ var SevenSegmentDisplay = function (_a) {
         return Array.from({ length: segmentSize }, function (_, i) {
             if (value === null)
                 return digits["null"];
-            var valueString = value.toString();
+            var valueString = value.toString().toUpperCase();
             var startFromIndex = i < valueString.length ? i : null;
             var isNegative = valueString.charAt(0) === "-" && i === 0;
             if (startFromEnd) {
@@ -42,7 +73,10 @@ var SevenSegmentDisplay = function (_a) {
                 var digitIndex = startFromEnd ? startFromIndex - (segmentSize - valueString.length) : i;
                 if (isNegative)
                     return digits["-"];
-                return digits[valueString.charAt(digitIndex)];
+                var digit = valueString.charAt(digitIndex);
+                if (digit in digits)
+                    return digits[digit];
+                return digits["null"];
             }
             return digits["null"];
         });

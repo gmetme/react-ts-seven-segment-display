@@ -11,7 +11,7 @@ const SevenSegmentDisplay = (
     startFromEnd,
     autoGrow,
   } :{
-    value?: number | null,
+    value?: number | string | null,
     height?: number,
     segmentSize?: number,
     bgColor?: string,
@@ -24,8 +24,13 @@ const SevenSegmentDisplay = (
   segmentSize = autoGrow && value!==null && value.toString().length > segmentSize ? value.toString().length : segmentSize
 
   const digits = {
-    "-": [ bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, color ],
     "null": [ bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, bgColor ],
+    " ": [ bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, bgColor ],
+    "-": [ bgColor, bgColor, bgColor, bgColor, bgColor, bgColor, color ],
+    "_": [ bgColor, bgColor, bgColor, color, bgColor, bgColor, bgColor ],
+    "=": [ bgColor, bgColor, bgColor, color, bgColor, bgColor, color ],
+    "[": [ color, bgColor, bgColor, color, color, color, bgColor ],
+    "]": [ color, color, color, color, bgColor, bgColor, bgColor ],
     "0": [ color, color, color, color, color, color, bgColor ],
     "1": [ bgColor, color, color, bgColor, bgColor, bgColor, bgColor ],
     "2": [ color, color, bgColor, color, color, bgColor, color ],
@@ -36,6 +41,33 @@ const SevenSegmentDisplay = (
     "7": [ color, color, color, bgColor, bgColor, bgColor, bgColor ],
     "8": [ color, color, color, color, color, color, color ],
     "9": [ color, color, color, color, bgColor, color, color ],
+
+    "A":  [ color, color, color, bgColor, color, color, color ],
+    "B":  [ bgColor, bgColor, color, color, color, color, color ],
+    "C":  [ color, bgColor, bgColor, color, color, color, bgColor ],
+    "D":  [ bgColor, color, color, color, color, bgColor, color ],
+    "E":  [ color, bgColor, bgColor, color, color, color, color ],
+    "F":  [ color, bgColor, bgColor, bgColor, color, color, color ],
+    "G":  [ color, bgColor, color, color, color, color, bgColor ],
+    "H":  [ bgColor, bgColor, color, bgColor, color, color, color ],
+    "I":  [ bgColor, bgColor, bgColor, bgColor, color, color, bgColor ],
+    "J":  [ bgColor, color, color, color, color, bgColor, bgColor ],
+    "K":  [ color, bgColor, color, bgColor, color, color, color ],
+    "L":  [ bgColor, bgColor, bgColor, color, color, color, bgColor ],
+    "M":  [ color, bgColor, color, bgColor, color, bgColor, bgColor ],
+    "N":  [ color, color, color, bgColor, color, color, bgColor ],
+    "O":  [ color, color, color, color, color, color, bgColor ],
+    "P":  [ color, color, bgColor, bgColor, color, color, color ],
+    "Q":  [ color, color, color, bgColor, bgColor, color, color ],
+    "R":  [ color, color, bgColor, bgColor, color, color, bgColor ],
+    "S":  [ color, bgColor, color, color, bgColor, color, color ],
+    "T":  [ bgColor, bgColor, bgColor, color, color, color, color ],
+    "U":  [ bgColor, color, color, color, color, color, bgColor ],
+    "V":  [ bgColor, color, color, color, bgColor, color, bgColor ],
+    "W":  [ bgColor, color, bgColor, color, bgColor, color, bgColor ],
+    "X":  [ bgColor, color, color, bgColor, color, color, color ],
+    "Y":  [ bgColor, color, color, color, bgColor, color, color ],
+    "Z":  [ color, color, bgColor, color, bgColor, bgColor, color ]
   }
 
   const digitPositions = [
@@ -51,7 +83,7 @@ const SevenSegmentDisplay = (
   const segments = useMemo(() => {
     return Array.from({ length: segmentSize }, (_, i) => {
       if (value === null) return digits["null"]
-      const valueString = value.toString()
+      const valueString = value.toString().toUpperCase()
 
       let startFromIndex= i < valueString.length ? i : null
       let isNegative = valueString.charAt(0) === "-" && i === 0
@@ -66,13 +98,16 @@ const SevenSegmentDisplay = (
 
         if (isNegative) return digits["-"]
 
-        return digits[valueString.charAt(digitIndex) as keyof typeof digits]
+        const digit = valueString.charAt(digitIndex)
+
+        if (digit in digits) return digits[digit as keyof typeof digits]
+
+        return digits["null"]
       }
 
       return digits["null"]
     })
   }, [value]);
-
 
   return (
     <div
