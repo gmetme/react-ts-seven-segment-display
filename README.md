@@ -4,8 +4,11 @@ A React component that renders a seven-segment display to visually represent num
 
 ## Installation
 
-![Seven Segment Display](https://github.com/begenchmyrat/react-ts-seven-segment-display/assets/start.jpg)
-![Seven Segment Display](https://github.com/begenchmyrat/react-ts-seven-segment-display/assets/end.jpg)
+| left-aligned (default)                             | right-aligned                                  |
+|----------------------------------------------------|------------------------------------------------|
+| ![Seven Segment Display start](./assets/start.jpg) | ![Seven Segment Display end](./assets/end.jpg) |
+
+![Seven Segment Display examples](./assets/examples.png)
 
 Install the package using npm:
 
@@ -28,7 +31,7 @@ function App() {
   return (
     <div>
       <h1>Seven Segment Display</h1>
-      <SevenSegmentDisplay value={123} height={100} segmentSize={6} color="#FF0000" />
+      <SevenSegmentDisplay value={123} height={100} segmentSize={6} />
     </div>
   );
 }
